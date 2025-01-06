@@ -33,12 +33,21 @@ const modelOrientation = [90, 0, 0]
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // Replace `your_access_token` with your Cesium ion access token.
 
+const SWITZERLAND_BOUNDS = [5.140242, 45.398181, 11.47757, 48.230651];
+const SWITZERLAND_RECTANGLE = Cesium.Rectangle.fromDegrees(...SWITZERLAND_BOUNDS);
+
+const tms = new Cesium.UrlTemplateImageryProvider({
+  url : "https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg",
+  maximumLevel : 15,
+  rectangle: SWITZERLAND_RECTANGLE,
+});
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
 const viewer = new Cesium.CesiumWidget('cesiumContainer', {
-    terrain: Cesium.Terrain.fromWorldTerrain(),
+    terrain: new Cesium.Terrain(Cesium.CesiumTerrainProvider.fromUrl("https://3d.geo.admin.ch/ch.swisstopo.terrain.3d/v1")),
+    baseLayer: new Cesium.ImageryLayer(tms),
 });
-
+  
 viewer.camera.flyTo({
     destination: Cesium.Cartesian3.fromDegrees(...modelOrigin),
     duration: 0,
