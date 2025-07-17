@@ -1,4 +1,4 @@
-# IFC-GlTF
+# IFC-glTF
 
 ## The library
 
@@ -8,7 +8,7 @@ See https://technical.buildingsmart.org/standards/ifc/ifc-formats/
 It runs entirely on the client side:
 - IFC files are parsed by web-ifc, which uses a C++ library converted as WebAssembly;
 - the models are loaded in Three.js;
-- then exported with the ThreeJS GlTF exporter.
+- then exported with the ThreeJS glTF exporter.
 
 At that point you can load the resulting glTF in any 3D library.
 You can look at the provided demo to see how to do that with CesiumJS.
